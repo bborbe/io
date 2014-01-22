@@ -51,4 +51,5 @@ func (b *bufferedWriter) Close() error {
 			return nil
 		}
 	}
+	return nil
 }
