@@ -8,6 +8,11 @@ Documentation
 
 http://godoc.org/github.com/bborbe/io
 
+Continuous integration
+----------------------
+
+http://jenkins.benjamin-borbe.de/job/Go-Io/
+
 Copyright and license
 ---------------------
 
