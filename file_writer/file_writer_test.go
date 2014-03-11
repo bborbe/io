@@ -1,8 +1,8 @@
 package file_writer
 
 import (
-	. "github.com/bborbe/assert"
 	"testing"
+	. "github.com/bborbe/assert"
 )
 
 func TestImplementsWriter(t *testing.T) {

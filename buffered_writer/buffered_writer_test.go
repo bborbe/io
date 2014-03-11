@@ -2,10 +2,10 @@ package buffered_writer
 
 import (
 	"bytes"
-	. "github.com/bborbe/assert"
 	"io"
 	"testing"
 	"time"
+	. "github.com/bborbe/assert"
 )
 
 func TestImplementsWriter(t *testing.T) {

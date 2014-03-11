@@ -2,8 +2,9 @@ package file_writer
 
 import (
 	"bufio"
-	"github.com/bborbe/io"
 	"os"
+
+	"github.com/bborbe/io"
 )
 
 type FileWriter interface {
