@@ -4,6 +4,7 @@ import (
 	"io"
 	"io/ioutil"
 	"testing"
+
 	. "github.com/bborbe/assert"
 )
 

@@ -3,6 +3,7 @@ package mock
 import (
 	"io"
 	"testing"
+
 	. "github.com/bborbe/assert"
 )
 

@@ -2,6 +2,7 @@ package file_writer
 
 import (
 	"testing"
+
 	. "github.com/bborbe/assert"
 )
 
