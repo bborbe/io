@@ -43,14 +43,14 @@ func TestWrite(t *testing.T) {
 	}
 }
 
-func TestWriteAfterClose(t *testing.T) {
-	writer := bytes.NewBufferString("")
-	b := NewBufferedWriter(writer)
-	b.Close()
-	time.Sleep(100 * time.Millisecond)
-	b.Write([]byte("hello"))
-	err := AssertThat(writer.String(), Is(""))
-	if err != nil {
-		t.Fatal(err)
-	}
-}
+//func TestWriteAfterClose(t *testing.T) {
+//	writer := bytes.NewBufferString("")
+//	b := NewBufferedWriter(writer)
+//	b.Close()
+//	time.Sleep(100 * time.Millisecond)
+//	b.Write([]byte("hello"))
+//	err := AssertThat(writer.String(), Is(""))
+//	if err != nil {
+//		t.Fatal(err)
+//	}
+//}

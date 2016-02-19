@@ -15,21 +15,17 @@ type bufferedWriter struct {
 func NewBufferedWriter(writer io.Writer) *bufferedWriter {
 	b := new(bufferedWriter)
 	b.buffer = make(chan []byte, BUFFER_SIZE)
-	b.done = make(chan bool)
 	b.writer = writer
+	b.done = make(chan bool)
 	go b.work()
 	return b
 }
 
 func (b *bufferedWriter) work() {
-	for {
-		select {
-		case <-b.done:
-			return
-		case p := <-b.buffer:
-			b.writer.Write(p)
-		}
+	for p := range b.buffer {
+		b.writer.Write(p)
 	}
+	b.done <- true
 }
 
 func (b *bufferedWriter) Write(p []byte) (n int, err error) {
@@ -38,18 +34,7 @@ func (b *bufferedWriter) Write(p []byte) (n int, err error) {
 }
 
 func (b *bufferedWriter) Close() error {
-	select {
-	case b.done <- true:
-	default:
-	}
-
-	for {
-		select {
-		case p := <-b.buffer:
-			b.writer.Write(p)
-		default:
-			return nil
-		}
-	}
+	close(b.buffer)
+	<-b.done
 	return nil
 }
