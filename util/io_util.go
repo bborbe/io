@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"os"
-	"os/user"
 	"strings"
 
 	"github.com/bborbe/log"
@@ -35,11 +34,11 @@ func IsDirectory(dir string) error {
 
 func NormalizePath(path string) (string, error) {
 	if strings.Index(path, "~/") == 0 {
-		usr, err := user.Current()
-		if err != nil {
-			return "", err
+		home := os.Getenv("HOME")
+		if len(home) == 0 {
+			return "", fmt.Errorf("env HOME not found")
 		}
-		path = fmt.Sprintf("%s/%s", usr.HomeDir, path[2:])
+		path = fmt.Sprintf("%s/%s", home, path[2:])
 		logger.Debugf("replace ~/ with homedir. new path: %s", path)
 	}
 	return path, nil
