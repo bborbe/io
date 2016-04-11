@@ -6,6 +6,8 @@ import (
 	"os"
 	"strings"
 
+	"path/filepath"
+
 	"github.com/bborbe/log"
 )
 
@@ -41,5 +43,5 @@ func NormalizePath(path string) (string, error) {
 		path = fmt.Sprintf("%s/%s", home, path[2:])
 		logger.Debugf("replace ~/ with homedir. new path: %s", path)
 	}
-	return path, nil
+	return filepath.Abs(path)
 }
