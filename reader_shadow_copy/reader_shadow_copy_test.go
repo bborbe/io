@@ -2,13 +2,11 @@ package reader_shadow_copy
 
 import (
 	"testing"
-
 	"bytes"
 	"io"
 	"io/ioutil"
-
 	. "github.com/bborbe/assert"
-	"github.com/bborbe/io/nop_closer"
+	"github.com/bborbe/io/reader_nop_close"
 )
 
 func TestImplementsReadCloser(t *testing.T) {
@@ -20,7 +18,7 @@ func TestImplementsReadCloser(t *testing.T) {
 }
 
 func newReaderCloser(content string) io.ReadCloser {
-	return nop_closer.New(bytes.NewBufferString(content))
+	return reader_nop_close.New(bytes.NewBufferString(content))
 }
 
 func TestImplementsShadow(t *testing.T) {

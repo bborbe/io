@@ -1,4 +1,4 @@
-package nop_closer
+package reader_nop_close
 
 import (
 	"testing"
