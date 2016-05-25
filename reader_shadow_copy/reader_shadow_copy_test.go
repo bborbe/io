@@ -1,10 +1,11 @@
 package reader_shadow_copy
 
 import (
-	"testing"
 	"bytes"
 	"io"
 	"io/ioutil"
+	"testing"
+
 	. "github.com/bborbe/assert"
 	"github.com/bborbe/io/reader_nop_close"
 )
