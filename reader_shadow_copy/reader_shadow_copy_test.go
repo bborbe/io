@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 
 	. "github.com/bborbe/assert"
+	"github.com/bborbe/io/nop_closer"
 )
 
 func TestImplementsReadCloser(t *testing.T) {
@@ -19,7 +20,7 @@ func TestImplementsReadCloser(t *testing.T) {
 }
 
 func newReaderCloser(content string) io.ReadCloser {
-	return NopCloser(bytes.NewBufferString(content))
+	return nop_closer.New(bytes.NewBufferString(content))
 }
 
 func TestImplementsShadow(t *testing.T) {
@@ -58,16 +59,4 @@ func createString(l int) string {
 		result.WriteString("a")
 	}
 	return result.String()
-}
-
-type nopCloser struct {
-	io.Reader
-}
-
-func (nopCloser) Close() error {
-	return nil
-}
-
-func NopCloser(r io.Reader) io.ReadCloser {
-	return nopCloser{r}
 }
