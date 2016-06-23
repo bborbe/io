@@ -1,37 +1,38 @@
 package util
 
 import (
-	"errors"
 	"fmt"
 	"os"
 	"strings"
-
 	"path/filepath"
-
 	"github.com/bborbe/log"
 )
 
 var logger = log.DefaultLogger
 
-func IsDirectory(dir string) error {
-
+func IsDirectory(dir string) (bool, error) {
+	logger.Debugf("IsDir %s", dir)
 	file, err := os.Open(dir)
-	if err != nil {
-		logger.Debugf("open %s failed: %v", dir, err)
-		return err
-	}
 	defer file.Close()
+	if err != nil {
+		logger.Debugf("IsDir - open dir %s failed: %v", dir, err)
+		return false, nil
+	}
 	fileinfo, err := file.Stat()
 	if err != nil {
-		logger.Debugf("file stat failed: %v", err)
-		return err
+		logger.Debugf("IsDir get state for dir %s failed: %v", dir, err)
+		return false, err
 	}
-	if !fileinfo.IsDir() {
-		msg := fmt.Sprintf("%s is not a directory", dir)
-		logger.Debug(msg)
-		return errors.New(msg)
+	return fileinfo.IsDir(), nil
+}
+
+func Exists(name string) bool {
+	if _, err := os.Stat(name); err != nil {
+		if os.IsNotExist(err) {
+			return false
+		}
 	}
-	return nil
+	return true
 }
 
 func NormalizePath(path string) (string, error) {

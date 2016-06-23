@@ -7,8 +7,11 @@ import (
 )
 
 func TestIsDirectory(t *testing.T) {
-	err := AssertThat(IsDirectory("/tmp"), NilValue())
-	if err != nil {
+	isDir, err := IsDirectory("/tmp")
+	if err := AssertThat(err, NilValue()); err != nil {
+		t.Fatal(err)
+	}
+	if err := AssertThat(isDir, Is(true)); err != nil {
 		t.Fatal(err)
 	}
 }
