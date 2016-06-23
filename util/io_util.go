@@ -3,8 +3,9 @@ package util
 import (
 	"fmt"
 	"os"
-	"strings"
 	"path/filepath"
+	"strings"
+
 	"github.com/bborbe/log"
 )
 
