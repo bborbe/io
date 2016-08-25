@@ -33,7 +33,9 @@ func (f *fileWriter) Write(p []byte) (int, error) {
 }
 
 func (f *fileWriter) Close() error {
-	f.Flush()
+	if err := f.Flush(); err != nil {
+		return err
+	}
 	return f.file.Close()
 }
 
