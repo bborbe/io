@@ -6,22 +6,20 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/bborbe/log"
+	"github.com/golang/glog"
 )
 
-var logger = log.DefaultLogger
-
 func IsDirectory(dir string) (bool, error) {
-	logger.Debugf("IsDir %s", dir)
+	glog.V(2).Infof("IsDir %s", dir)
 	file, err := os.Open(dir)
 	defer file.Close()
 	if err != nil {
-		logger.Debugf("IsDir - open dir %s failed: %v", dir, err)
+		glog.V(2).Infof("IsDir - open dir %s failed: %v", dir, err)
 		return false, nil
 	}
 	fileinfo, err := file.Stat()
 	if err != nil {
-		logger.Debugf("IsDir get state for dir %s failed: %v", dir, err)
+		glog.V(2).Infof("IsDir get state for dir %s failed: %v", dir, err)
 		return false, err
 	}
 	return fileinfo.IsDir(), nil
@@ -43,7 +41,7 @@ func NormalizePath(path string) (string, error) {
 			return "", fmt.Errorf("env HOME not found")
 		}
 		path = fmt.Sprintf("%s/%s", home, path[2:])
-		logger.Debugf("replace ~/ with homedir. new path: %s", path)
+		glog.V(2).Infof("replace ~/ with homedir. new path: %s", path)
 	}
 	return filepath.Abs(path)
 }
