@@ -10,7 +10,7 @@ import (
 )
 
 func IsDirectory(dir string) (bool, error) {
-	glog.V(2).Infof("IsDir %s", dir)
+	glog.V(4).Infof("IsDir %s", dir)
 	file, err := os.Open(dir)
 	defer file.Close()
 	if err != nil {
@@ -35,6 +35,7 @@ func Exists(name string) bool {
 }
 
 func NormalizePath(path string) (string, error) {
+	glog.V(4).Infof("NormalizePath %s", path)
 	if strings.Index(path, "~/") == 0 {
 		home := os.Getenv("HOME")
 		if len(home) == 0 {
