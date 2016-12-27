@@ -4,7 +4,7 @@ IO utils for Go
 
 ## Continuous integration
 
-[Jenkins](https://www.benjamin-borbe.de/jenkins/job/Go-Io/)
+[Jenkins](https://jenkins.benjamin-borbe.de/job/Go-Io/)
 
 ## Copyright and license
 
